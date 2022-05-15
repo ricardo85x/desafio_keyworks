@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  database:
+    
+    image: postgres
+    container_name: database
+    restart: always
+    env_file: 
+      - ./src/.env
+    environment: 
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_DB: tasks
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  php-apache:
+    container_name: php-apache
+    build:
+      context: ./php
+    ports:
+        - '3005:80'
+    volumes:
+      - ./src:/var/www/laravel_docker
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database
+
+volumes:
+  postgres_data:
