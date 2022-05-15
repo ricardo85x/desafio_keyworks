@@ -24,6 +24,6 @@ ou
 **OBS**
 
 Para o frontend funcionar verifique se o backend esta rodando na porta 3005.
-Caso esteja em outra porta, altero o arquivo .env
+Caso esteja em outra porta, altere o arquivo .env
 
 
